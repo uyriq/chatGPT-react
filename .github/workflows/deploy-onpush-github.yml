@@ -40,7 +40,7 @@ jobs:
             - name: Install dependencies
               run: cd ./client && CI= npm ci --ignore-scripts 
             # - run: CI= npm ci
-            - run: CI= npm run build
+            - run: cd ./client && CI= npm run build
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3.9.0

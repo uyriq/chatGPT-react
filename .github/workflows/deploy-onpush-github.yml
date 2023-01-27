@@ -1,5 +1,5 @@
 name: GitHub Pages on push
-
+# indent 4 (four not two) spaces!
 on:
     pull_request:
         branches:
@@ -19,17 +19,17 @@ jobs:
             deployments: write
             pages: write
         env:
-                CI: false
-                OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-                OPENAI_ORG_KET: ${{ secrets.OPENAI_ORG_KET }}
-                REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-                REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
-                REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
-                REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
-                REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
-                REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
-                REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
-                REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}    
+            CI: false
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+            OPENAI_ORG_KET: ${{ secrets.OPENAI_ORG_KET }}
+            REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+            REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
+            REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
+            REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+            REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
+            REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
+            REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+            REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}    
         concurrency:
             group: ${{ github.workflow }}-${{ github.ref }}
         steps:

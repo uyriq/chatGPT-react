@@ -1,5 +1,4 @@
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
 import {
   getFirestore,
   query,

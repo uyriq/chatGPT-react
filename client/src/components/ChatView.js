@@ -62,7 +62,7 @@ const ChatView = () => {
     setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
-
+    console.log(`+ ${POST_URL}`)
     const response = await fetch(POST_URL, {
       method: 'POST',
       headers: {

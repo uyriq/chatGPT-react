@@ -18,28 +18,7 @@ jobs:
             pull-requests: write
             deployments: write
             pages: write
-
-        concurrency:
-            group: ${{ github.workflow }}-${{ github.ref }}
-        steps:
-            - uses: actions/checkout@v3
-
-            - name: Setup Node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '16.19'
-
-            - name: Cache dependencies
-              uses: actions/cache@v3
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
-            # not production! CI=
-            - name: Install dependencies
-            # - run: CI= npm ci
-              env:
+        env:
                 CI: false
                 OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
                 OPENAI_ORG_KET: ${{ secrets.OPENAI_ORG_KET }}
@@ -50,10 +29,27 @@ jobs:
                 REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
                 REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
                 REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
-                REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
+                REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}    
+        concurrency:
+            group: ${{ github.workflow }}-${{ github.ref }}
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '16.19'
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
+            # not production! CI=
+            - name: Install dependencies
+            # - run: CI= npm ci
               run: cd ./client && CI= npm ci --ignore-scripts && node -e "console.log(process.env.REACT_APP_MEASUREMENT_ID)" && echo $REACT_APP_BASE_URL
             - run: echo $REACT_APP_BASE_URL && cd ./client && CI= npm run build
-
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3.9.0
               #  if: ${{ github.ref == 'refs/heads/main' }}

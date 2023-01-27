@@ -4,7 +4,7 @@ module.exports = {
         es2021: true,
     },
 
-    extends: ['prettier'],
+    extends: [ ],
     overrides: [
         {
             files: ['**/*.ts?(x)'],
@@ -15,7 +15,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: [ 'prettier'],
+    plugins: [  ],
     rules: {
         
         'prettier/prettier': 0,

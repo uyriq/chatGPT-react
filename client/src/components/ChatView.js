@@ -57,7 +57,7 @@ const ChatView = () => {
     const aiModel = selected
 
     const BASE_URL = process.env.SERVER_BASE_URL || 'https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev/'
-    const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
+    const PATH = aiModel === options[0] ? '/davinci' : '/dalle'
     const POST_URL = BASE_URL + PATH
 
     setThinking(true)

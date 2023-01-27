@@ -2,6 +2,7 @@
   "name": "react-chatgpt-client-server",
   "version": "1.0.0",
   "private": true,
+  "homepage": ".",
   "author": {
     "name": "eyucoder",
     "email": "eyueldaniel0921@gmail.com",

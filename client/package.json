@@ -2,6 +2,7 @@
     "name": "react-template",
     "version": "1.0.1",
     "private": true,
+    "homepage": ".",
     "author": {
         "name": "eyucoder",
         "email": "eyueldaniel0921@gmail.com",

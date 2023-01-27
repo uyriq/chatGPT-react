@@ -40,6 +40,7 @@ jobs:
             - name: Install dependencies
               run: cd ./client && CI= npm ci --ignore-scripts 
             # - run: CI= npm ci
+            - run: echo $REACT_APP_BASE_URL
             - run: cd ./client && CI= npm run build
 
             - name: Deploy

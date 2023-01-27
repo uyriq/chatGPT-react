@@ -55,7 +55,7 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL
+    const BASE_URL = process.env.SERVER_BASE_URL
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH
 

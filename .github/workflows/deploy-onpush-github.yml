@@ -38,10 +38,9 @@ jobs:
                       ${{ runner.os }}-node-
             # not production! CI=
             - name: Install dependencies
-            - run: cd ./client && CI= npm ci --ignore-scripts
-            - run: node -e "console.log(process.env.REACT_APP_MEASUREMENT_ID)" 
+              run: cd ./client && CI= npm ci --ignore-scripts && node -e "console.log(process.env.REACT_APP_MEASUREMENT_ID)"
             # - run: CI= npm ci
-            - env:
+              env:
                 CI: false
                 OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
                 OPENAI_API_KEY: ${{ secrets.OPENAI_ORG_KET }}
@@ -53,8 +52,8 @@ jobs:
                 OPENAI_API_KEY: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
                 OPENAI_API_KEY: ${{ secrets.REACT_APP_PROJECT_ID }}
                 OPENAI_API_KEY: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
-            - run: echo $REACT_APP_BASE_URL
-            - run: cd ./client && CI= npm run build
+              run: echo $REACT_APP_BASE_URL
+              run: cd ./client && CI= npm run build
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3.9.0

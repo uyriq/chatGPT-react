@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
@@ -55,7 +56,7 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = process.env.SERVER_BASE_URL
+    const BASE_URL = process.env.SERVER_BASE_URL || 'https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev'
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH
 
@@ -109,6 +110,7 @@ const ChatView = () => {
   }, [])
 
   return (
+  
     <div className="chatview">
       <main className='chatview__chatarea'>
 

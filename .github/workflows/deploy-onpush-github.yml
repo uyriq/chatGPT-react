@@ -41,7 +41,7 @@ jobs:
             - run: cd ./client && CI= npm ci --ignore-scripts
             - run: node -e "console.log(process.env.REACT_APP_MEASUREMENT_ID)" 
             # - run: CI= npm ci
-              env:
+            - env:
                 CI: false
                 OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
                 OPENAI_API_KEY: ${{ secrets.OPENAI_ORG_KET }}

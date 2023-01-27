@@ -52,7 +52,7 @@ jobs:
                 REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
                 REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
                 REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
-              run: echo $REACT_APP_BASE_URL && cd ./client && CI= npm run build
+            - run: echo $REACT_APP_BASE_URL && cd ./client && CI= npm run build
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3.9.0

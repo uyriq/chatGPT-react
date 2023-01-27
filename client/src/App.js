@@ -8,6 +8,7 @@ import { auth } from './firebase'
 
 const App = () => {
   const [user] = useAuthState(auth)
+  //TODO 
   return (
     <ChatContextProvider>
       <div>

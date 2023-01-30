@@ -5,6 +5,7 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
 	"features": {
+		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/devcontainers-contrib/features/prisma:2": {},
 		"ghcr.io/devcontainers-contrib/features/redis-homebrew:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
@@ -12,12 +13,8 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3002.preview.app.github.dev
-	// https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev
-	// https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-6379.preview.app.github.dev
 	"forwardPorts": [
 		3001,
-		3002,
 		6379
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.

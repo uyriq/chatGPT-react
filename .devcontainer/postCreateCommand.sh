@@ -1,4 +1,4 @@
 #!/bin/bash
-alias redis='nohup redis-server  ./redis.conf   &> /dev/null &disown'
+cd ./server && npm ci && npm run server
 # redis
 # cd ./server && npm ci && npm run server

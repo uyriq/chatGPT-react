@@ -17,7 +17,7 @@ const ChatView = () => {
   const [selected, setSelected] = useState(options[0])
   const [messages, addMessage, , , setLimit] = useContext(ChatContext)
   const email = auth.currentUser.email
-  const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+  const picUrl = auth.currentUser.photoURL || 'https://i.pravatar.cc/64'
 
   /**
    * Scrolls the chat area to the bottom.
@@ -50,15 +50,20 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
+
+  function joinAbsoluteUrlPath(...args) {
+    return  args.map( pathPart => pathPart.replace(/(^\/|\/$)/g, "") ).join("/");
+}
+
   const sendMessage = async (e) => {
     e.preventDefault()
 
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = process.env.SERVER_BASE_URL || 'https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev'
-    const PATH = aiModel === options[0] ? '/davinci' : '/dalle'
-    const POST_URL = BASE_URL + PATH
+    const BASE_URL = process.env.SERVER_BASE_URL 
+    const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
+    const POST_URL = joinAbsoluteUrlPath(BASE_URL , PATH)
 
     setThinking(true)
     setFormValue('')

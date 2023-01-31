@@ -9,11 +9,26 @@
         6379
     ],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "remoteUser":"node",
+    "updateContentCommand": " apt-get update && apt-get -y install --no-install-recommends `$@` ",
     "postCreateCommand": ".devcontainer/postCreateCommand.sh",
     // Configure tool-specific properties.
     // "customizations": {},
     "postAttachCommand": ".devcontainer/postAttachCommand.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mads-hartmann.bash-ide-vscode",
+                "dbaeumer.vscode-eslint"
+            ]
+        },
+        "codespaces": {
+            "repositories": {
+                "devcontainers/features": {
+                    "permissions": "write-all"
+                }
+            }
+        }
+    },
     "features": {
 	"ghcr.io/devcontainers-contrib/features/redis-homebrew:1": {}
 }

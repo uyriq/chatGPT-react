@@ -1,7 +1,7 @@
 {
     "name": "Node.js",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
     // Features to add to the dev container. More info: https://containers.dev/features.
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [
@@ -30,6 +30,6 @@
         }
     },
     "features": {
-	"ghcr.io/devcontainers-contrib/features/redis-homebrew:1": {}
+	
 }
 }

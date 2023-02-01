@@ -54,6 +54,7 @@ const ChatView = () => {
   function joinAbsoluteUrlPath(...args) {
     return  args.map( pathPart => pathPart.replace(/(^\/|\/$)/g, "") ).join("/")||'';
 }
+  const BASE_URL = envVar || process.env.SERVER_BASE_URL
 
   const sendMessage = async (e) => {
     e.preventDefault()
@@ -61,7 +62,6 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = envVar || process.env.SERVER_BASE_URL
     console.log(`+${BASE_URL}`)
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL , ('/'+PATH))

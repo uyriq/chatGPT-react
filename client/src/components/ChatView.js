@@ -5,6 +5,10 @@ import { ChatContext } from '../context/chatContext'
 import { auth } from '../firebase'
 import Thinking from './Thinking'
 
+const appConfig = {
+  serverBaseUrl: process.env.SERVER_BASE_URL
+}
+
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
  */
@@ -15,7 +19,7 @@ const ChatView = () => {
   const [thinking, setThinking] = useState(false)
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
-  const [messages, addMessage, , , setLimit, envVar, setenvVar] = useContext(ChatContext)
+  const [messages, addMessage, , , setLimit] = useContext(ChatContext)
   const email = auth.currentUser.email
   const picUrl = auth.currentUser.photoURL || 'https://i.pravatar.cc/64'
 
@@ -50,11 +54,11 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
+  const BASE_URL = appConfig.serverBaseUrl
 
   function joinAbsoluteUrlPath(...args) {
-    return  args.map( pathPart => pathPart.replace(/(^\/|\/$)/g, "") ).join("/")||'';
-}
-  const BASE_URL = envVar || process.env.SERVER_BASE_URL
+    return args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/") || ''
+  }
 
   const sendMessage = async (e) => {
     e.preventDefault()
@@ -62,9 +66,8 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    console.log(`+${BASE_URL}`)
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
-    const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL , ('/'+PATH))
+    const POST_URL = joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
 
     setThinking(true)
     setFormValue('')
@@ -92,7 +95,7 @@ const ChatView = () => {
       setThinking(false)
     } else {
       // The request failed
-      window.alert(`openAI is returning an error: ${response.status + response.statusText}
+      window.alert(`openAI is returning an error: ${response.status + response.statusText} 
       please try again later`)
       console.log(`Request failed with status code ${response.status}`)
       setThinking(false)

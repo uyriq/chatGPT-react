@@ -50,7 +50,9 @@ jobs:
             - name: Install dependencies
             # - run: CI= npm ci
               run: cd ./client && npm install
-            - run: echo $REACT_APP_BASE_URL && cd ./client &&  npm install && CI= npm run build
+            - run: echo $REACT_APP_BASE_URL && cd ./client &&  npm install && npm run build
+              env:
+                  SERVER_BASE_URL: ${{ secrets.SERVER_BASE_URL }}
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3.9.0
               #  if: ${{ github.ref == 'refs/heads/main' }}

@@ -15,7 +15,7 @@ const ChatView = () => {
   const [thinking, setThinking] = useState(false)
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
-  const [messages, addMessage, , , setLimit] = useContext(ChatContext)
+  const [messages, addMessage, , , setLimit, envVar, setenvVar] = useContext(ChatContext)
   const email = auth.currentUser.email
   const picUrl = auth.currentUser.photoURL || 'https://i.pravatar.cc/64'
 
@@ -52,7 +52,7 @@ const ChatView = () => {
    */
 
   function joinAbsoluteUrlPath(...args) {
-    return  args.map( pathPart => pathPart.replace(/(^\/|\/$)/g, "") ).join("/");
+    return  args.map( pathPart => pathPart.replace(/(^\/|\/$)/g, "") ).join("/")||'';
 }
 
   const sendMessage = async (e) => {
@@ -61,7 +61,8 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = process.env.SERVER_BASE_URL
+    const BASE_URL = envVar || process.env.SERVER_BASE_URL
+    console.log(`+${BASE_URL}`)
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL , ('/'+PATH))
 
@@ -91,7 +92,7 @@ const ChatView = () => {
       setThinking(false)
     } else {
       // The request failed
-      window.alert(`openAI is returning an error: ${response.status + response.statusText} 
+      window.alert(`openAI is returning an error: ${response.status + response.statusText}
       please try again later`)
       console.log(`Request failed with status code ${response.status}`)
       setThinking(false)
@@ -115,7 +116,7 @@ const ChatView = () => {
   }, [])
 
   return (
-  
+
     <div className="chatview">
       <main className='chatview__chatarea'>
 

@@ -1,17 +1,12 @@
 import { createContext, useState } from 'react';
-import * as dotenv from 'dotenv';
+ 
 import useMessageCollection from '../hooks/useMessageCollection';
 
 /**
  * ChatContext is a context object that is used to share collection of messages
  * between components
  */
-try {
-  dotenv.config()
-} catch (error) {
-  console.error('Error loading environment variables:', error)
-  process.exit(1)
-}
+ 
 const ChatContext = createContext({});
 
 /**

@@ -54,7 +54,7 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
-  const BASE_URL = appConfig.serverBaseUrl
+  const baseURL = appConfig.serverBaseUrl
 
   function joinAbsoluteUrlPath(...args) {
     return args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/") || ''
@@ -67,7 +67,7 @@ const ChatView = () => {
     const aiModel = selected
 
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
-    const POST_URL = joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
+    const POST_URL = baseURL + PATH  // joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
 
     setThinking(true)
     setFormValue('')

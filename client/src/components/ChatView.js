@@ -10,12 +10,12 @@ import { ChatContext } from '../context/chatContext'
 import { auth, appConfig } from '../firebase'
 import Thinking from './Thinking'
 
-
 const ChatView = () => {
   const messagesEndRef = useRef()
   const inputRef = useRef()
   const [formValue, setFormValue] = useState('')
   const [thinking, setThinking] = useState(false)
+  const [BASE_URL, setBASE_URL] = useState('localhost')
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
   const [messages, addMessage, , , setLimit] = useContext(ChatContext)
@@ -54,9 +54,6 @@ const ChatView = () => {
    * @param {Event} e - The submit event of the form.
    */
 
-  const BASE_URL = appConfig.serverBaseUrl
-
-
   function joinAbsoluteUrlPath(...args) {
     return args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/") || ''
   }
@@ -68,15 +65,12 @@ const ChatView = () => {
     const aiModel = selected
 
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
-
-    const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
-
-
+    const POST_URL = BASE_URL + PATH
     setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
 
-    console.log(`+++ ${POST_URL}`)
+    console.log(`+--- ${POST_URL}`)
 
     const response = await fetch(POST_URL, {
       method: 'POST',
@@ -120,6 +114,7 @@ const ChatView = () => {
    * Focuses the TextArea input to when the component is first rendered.
    */
   useEffect(() => {
+    setBASE_URL(appConfig.serverBaseUrl || 'http://localhost')
     inputRef.current.focus()
   }, [])
 

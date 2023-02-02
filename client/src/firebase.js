@@ -55,6 +55,4 @@ const sendPasswordReset = async (email) => {
 };
 
 
-
 export { firebaseConfig, appConfig, app, auth, firestore }
-

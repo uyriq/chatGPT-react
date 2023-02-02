@@ -8,6 +8,8 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { initializeApp } from 'firebase/app'
+import { getRemoteConfig, getValue } from "firebase/remote-config";
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -19,14 +21,16 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
-const appConfig = {
-  serverBaseUrl: process.env.SERVER_BASE_URL
-}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
+const remoteConfig = getRemoteConfig(app);
 const auth = getAuth(app)
 const firestore = getFirestore(app)
+
+const appConfig = {
+  serverBaseUrl: `${getValue(remoteConfig, "API_SERVER_BASE_URL")}` || process.env.SERVER_BASE_URL
+}
 
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
@@ -55,4 +59,4 @@ const sendPasswordReset = async (email) => {
 };
 
 
-export { firebaseConfig, appConfig, app, auth, firestore }
+export { firebaseConfig, appConfig, app, auth, firestore, }

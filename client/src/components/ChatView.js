@@ -2,12 +2,10 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
-import { auth } from '../firebase'
+import { auth, appConfig } from '../firebase'
 import Thinking from './Thinking'
 
-const appConfig = {
-  serverBaseUrl: process.env.SERVER_BASE_URL
-}
+
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -72,7 +70,7 @@ const ChatView = () => {
     setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
-    console.log(`+ ${POST_URL}`)
+    console.log(`++ ${POST_URL}`)
     const response = await fetch(POST_URL, {
       method: 'POST',
       headers: {
@@ -95,7 +93,7 @@ const ChatView = () => {
       setThinking(false)
     } else {
       // The request failed
-      window.alert(`openAI is returning an error: ${response.status + response.statusText} 
+      window.alert(`openAI is returning an error: ${response.status + response.statusText}
       please try again later`)
       console.log(`Request failed with status code ${response.status}`)
       setThinking(false)

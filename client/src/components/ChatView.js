@@ -2,8 +2,9 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
-import { auth } from '../firebase'
+import { auth, appConfig } from '../firebase'
 import Thinking from './Thinking'
+
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -17,7 +18,7 @@ const ChatView = () => {
   const [selected, setSelected] = useState(options[0])
   const [messages, addMessage, , , setLimit] = useContext(ChatContext)
   const email = auth.currentUser.email
-  const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+  const picUrl = auth.currentUser.photoURL || 'https://i.pravatar.cc/64'
 
   /**
    * Scrolls the chat area to the bottom.
@@ -50,20 +51,25 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
+  const BASE_URL = appConfig.serverBaseUrl
+
+  function joinAbsoluteUrlPath(...args) {
+    return args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/") || ''
+  }
+
   const sendMessage = async (e) => {
     e.preventDefault()
 
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = process.env.SERVER_BASE_URL || 'https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev'
-    const PATH = aiModel === options[0] ? '/davinci' : '/dalle'
-    const POST_URL = BASE_URL + PATH
+    const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
+    const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
 
     setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
-    console.log(`+ ${POST_URL}`)
+    console.log(`+++ ${POST_URL}`)
     const response = await fetch(POST_URL, {
       method: 'POST',
       headers: {
@@ -86,7 +92,7 @@ const ChatView = () => {
       setThinking(false)
     } else {
       // The request failed
-      window.alert(`openAI is returning an error: ${response.status + response.statusText} 
+      window.alert(`openAI is returning an error: ${response.status + response.statusText}
       please try again later`)
       console.log(`Request failed with status code ${response.status}`)
       setThinking(false)
@@ -110,7 +116,7 @@ const ChatView = () => {
   }, [])
 
   return (
-  
+
     <div className="chatview">
       <main className='chatview__chatarea'>
 

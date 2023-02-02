@@ -14,7 +14,6 @@
 	// https://uyriq-refactored-goggles-p5v5w4v7grgh7x5w-3001.preview.app.github.dev
 	"forwardPorts": [
 		3001,
-		3002
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",

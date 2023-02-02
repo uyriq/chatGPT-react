@@ -19,6 +19,10 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
+const appConfig = {
+  serverBaseUrl: process.env.SERVER_BASE_URL
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
@@ -51,4 +55,4 @@ const sendPasswordReset = async (email) => {
 };
 
 
-export { firebaseConfig, app, auth, firestore }
+export { firebaseConfig, appConfig, app, auth, firestore }

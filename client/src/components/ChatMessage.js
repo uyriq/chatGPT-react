@@ -1,12 +1,11 @@
 import React from 'react'
-import { MdComputer } from 'react-icons/md'
+import { MdComputer, MdPersonOutline } from 'react-icons/md'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkGfm from 'remark-gfm'
-import { format } from 'timeago.js'
+import moment from 'moment'
 import Image from './Image'
-
 /**
  * A chat message component that displays a message with a timestamp and an icon.
  *
@@ -39,13 +38,12 @@ const ChatMessage = (props) => {
               }} />
 
 
-            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{format(createdAt)}</div>
+            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{moment(createdAt).fromNow()}</div>
           </div>}
 
       <div className="message__pic">
         {
-          ai ? <MdComputer /> :
-            <img className='cover w-10 h-10 rounded-full' loading='lazy' src={picUrl} alt='profile pic' />
+          ai ? <MdComputer /> : <MdPersonOutline />
         }
       </div>
     </div>

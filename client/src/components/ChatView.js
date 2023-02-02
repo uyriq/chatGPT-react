@@ -70,7 +70,7 @@ const ChatView = () => {
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
 
-    console.log(`+--- ${POST_URL}`)
+    console.log(`_ ${JSON.stringify(POST_URL)}`)
 
     const response = await fetch(POST_URL, {
       method: 'POST',
@@ -114,7 +114,7 @@ const ChatView = () => {
    * Focuses the TextArea input to when the component is first rendered.
    */
   useEffect(() => {
-    setBASE_URL(appConfig.serverBaseUrl || 'http://localhost')
+    setBASE_URL(JSON.stringify(appConfig.serverBaseUrl) || 'http://localhost')
     inputRef.current.focus()
   }, [])
 

@@ -16,7 +16,7 @@ const client = new Redis({
 });
 
 // Set the rate limit to 20 requests per day
-const rateLimit = parseInt(process.env.RATE_LIMIT, 10);
+const rateLimit = parseInt(process.env.RATE_LIMIT, 10)||10;
 const rateLimitPeriod = 24 * 60 * 60; // 24 hours
 
 
@@ -25,6 +25,7 @@ export const rateLimitMiddleware = (req, res, next) => {
   const email = req.body.email;
 
   // Check the request count for the email address
+  console.log(`redis - ${JSON.stringify(client.list)}`)
   client.get(email, (err, count) => {
     if (err) {
       console.error(err);

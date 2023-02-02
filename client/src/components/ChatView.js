@@ -1,4 +1,9 @@
 /* eslint-disable  */
+
+/**
+ * A chat view component that displays a list of messages and a form for sending new messages.
+ */
+
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
@@ -6,9 +11,6 @@ import { auth, appConfig } from '../firebase'
 import Thinking from './Thinking'
 
 
-/**
- * A chat view component that displays a list of messages and a form for sending new messages.
- */
 const ChatView = () => {
   const messagesEndRef = useRef()
   const inputRef = useRef()
@@ -51,7 +53,9 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
+
   const BASE_URL = appConfig.serverBaseUrl
+
 
   function joinAbsoluteUrlPath(...args) {
     return args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/") || ''
@@ -64,12 +68,16 @@ const ChatView = () => {
     const aiModel = selected
 
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
+
     const POST_URL = BASE_URL + PATH // joinAbsoluteUrlPath(BASE_URL, ('/' + PATH))
+
 
     setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
+
     console.log(`+++ ${POST_URL}`)
+
     const response = await fetch(POST_URL, {
       method: 'POST',
       headers: {

@@ -32,6 +32,8 @@ const appConfig = {
   serverBaseUrl: `${getValue(remoteConfig, "API_SERVER_BASE_URL")}` || process.env.SERVER_BASE_URL
 }
 
+console.log(`--- ${JSON.stringify(...appConfig.serverBaseUrl) }  ???  ${process.env.SERVER_BASE_URL}`)
+
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
